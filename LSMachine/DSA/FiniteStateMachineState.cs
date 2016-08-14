@@ -30,6 +30,13 @@ namespace LSMachine
 				return this;
 			}
 
+			/// <summary>
+			/// Returns the number of possible next states of this state
+			/// </summary>
+			/// <value> The adjacent count </value>
+			public uint AdjacentCount {
+				get { return (uint)NextStates.Count; }
+			}
 				
 			public IEnumerator<State> GetEnumerator () {
 				return NextStates.GetEnumerator();
