@@ -11,6 +11,11 @@ namespace LSMachine
 		public State StartState { get; set; }
 		public State CurrentState { get; set; }
 
+		/// <summary>
+		/// Creates the new state with the current object owner
+		/// and add its to the machine
+		/// </summary>
+		/// <returns> The newly created state </returns>
 		public State CreateNewState () {
 			var newState = new State(this);
 			States.Add(newState);
@@ -26,6 +31,10 @@ namespace LSMachine
 
 		}
 
+		/// <summary>
+		/// Does a query for all the finish states in the machine
+		/// </summary>
+		/// <returns> All the finish states in the machine</returns>
 		public IEnumerable<State> FinishStates () {
 			return from s in States
 			       where s.IsFinishState == true
