@@ -11,15 +11,16 @@ namespace LSMachine
 			public bool IsFinishState { get; set; }
 			public T Data { get; set; }
 
-			// <summary>
-			// Associates `this` with `Second` node in the finite state machine
-			// </summary>
-			// <param name="Second"> The node to asociate `this` with </param>
-
 			public Node () {
 				NextStates = new List<Node> ();
 			}
 
+			// <summary>
+			// Associates `this` with `Second` node in the finite state machine
+			// This is a chainable method
+			// </summary>
+			// <param name="Second"> The node to asociate `this` with </param>
+			// <returns> `this` for the chainable property </returns>
 			public Node Associate (Node Second) {
 
 				NextStates.Add(Second);
@@ -27,13 +28,11 @@ namespace LSMachine
 				return this;
 			}
 
-			public IEnumerator<Node> GetEnumerator ()
-			{
+			public IEnumerator<Node> GetEnumerator () {
 				return NextStates.GetEnumerator();
 			}
 
-			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-			{
+			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () {
 				return NextStates.GetEnumerator();
 			}
 		}
