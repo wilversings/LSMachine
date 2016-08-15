@@ -19,7 +19,7 @@ namespace LSMachine
 			string[] words = Sentance.Split(new char[] { ' ' });
 			int wordLen = words.Length;
 
-			State currentState = StartState;
+			var currentState = StartState;
 
 			for (int ind = 0; ind < wordLen - Coherence + 1; ++ind) {
 				string[] currentStateWords = words.Skip(ind).Take(Coherence).ToArray();
@@ -36,8 +36,9 @@ namespace LSMachine
 		public ICollection<string> Generate () {
 
 			var ans = new List<string>();
-			string[] currentKeyWords = null;
 			var originalCurrentState = CurrentState;
+
+			string[] currentKeyWords = null;
 
 			do {
 				GoToNextState();
