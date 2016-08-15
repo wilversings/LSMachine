@@ -4,7 +4,11 @@ using System.Numerics;
 using System.Linq;
 
 namespace LSMachine {
-	
+
+	/// <summary>
+	/// The implementation of a LSM which randomly selects
+	/// the new state
+	/// </summary>
 	public class RandomLsm : DialectModel<dynamic> { 
 
 		protected Random RandomEngine;

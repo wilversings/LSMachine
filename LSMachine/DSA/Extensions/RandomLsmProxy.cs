@@ -3,6 +3,11 @@ using LSMachine.Utils;
 using System.Linq;
 
 namespace LSMachine {
+
+	/// <summary>
+	/// A collection of extension methods for the RandomLsm
+	/// which helps populating the FSM with data from various sources
+	/// </summary>
 	public static class RandomLsmProxy {
 
 		/// <summary>

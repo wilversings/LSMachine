@@ -6,6 +6,12 @@ namespace LSMachine
 {
 	public abstract partial class FiniteStateMachine <TKey, TData> 
 		where TKey : class {
+
+		/// <summary>
+		/// This class encapsulates the concept of state in a FSM
+		/// This is basically a node, with a key which is unique in the
+		/// owner FSM.
+		/// </summary>
 		public partial class State :
 			IEnumerable<State> {
 
@@ -49,6 +55,10 @@ namespace LSMachine
 				get { return NextStates.Count; }
 			}
 
+			/// <summary>
+			/// Gets the adjacent state with the specified Key.
+			/// </summary>
+			/// <param name="Key">Key.</param>
 			public State this[TKey Key] {
 				get {
 					return NextStates[Key];

@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LSMachine
-{
+namespace LSMachine {
+
+	/// <summary>
+	/// Finite State Machine
+	/// <see href="https://en.wikipedia.org/wiki/Finite-state_machine"/> 
+	/// </summary>
 	public abstract partial class FiniteStateMachine <TKey, TData> {
 
-		protected Dictionary<TKey, State> States;
+		protected Dictionary<TKey, State> StateMap;
 
 		public State StartState { get; set; }
 		public State CurrentState { get; set; }
@@ -18,13 +22,13 @@ namespace LSMachine
 		/// <returns> The newly created state </returns>
 		public State CreateNewState (TKey Key) {
 			var newState = new State(this, Key);
-			States.Add(Key, newState);
+			StateMap.Add(Key, newState);
 			return newState;
 		}
 
 		public FiniteStateMachine () {
 
-			States = new Dictionary<TKey, State>();
+			StateMap = new Dictionary<TKey, State>();
 
 			StartState = CurrentState = new State(this, null);
 
@@ -35,23 +39,30 @@ namespace LSMachine
 		/// </summary>
 		/// <returns> All the finish states in the machine</returns>
 		public IEnumerable<State> FinishStates () {
-			return from s in States.Values
+			return from s in StateMap.Values
 			       where s.IsFinishState == true
 			       select s;
 		}
 
+		/// <summary>
+		/// Resets the machine (current state) to the start state
+		/// </summary>
 		public void Reset () {
 			CurrentState = StartState;
 		}
 
+		/// <summary>
+		/// Gets or sets the <see cref="LSMachine.FiniteStateMachine`2"/> with the specified Key.
+		/// </summary>
+		/// <param name="Key">Key.</param>
 		public State this[TKey Key] {
 			get {
-				if (States.ContainsKey(Key))
-					return States[Key];
+				if (StateMap.ContainsKey(Key))
+					return StateMap[Key];
 				return null;
 			}
 			set {
-				States[Key] = value;
+				StateMap[Key] = value;
 			}
 		}
 

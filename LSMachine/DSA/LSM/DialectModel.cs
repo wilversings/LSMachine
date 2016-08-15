@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LSMachine
-{
+namespace LSMachine {
+
 	public abstract class DialectModel<TData> : FiniteStateMachine<string, TData> {
 
 		protected string Alphabet;
-		protected Dictionary<string, FiniteStateMachine<string, TData>.State> StateMap;
 
 		public int Coherence { get; set; }
 
 		public DialectModel () {
 		}
 
+		/// <summary>
+		/// Checks whether the Sentance is accepted by the FSM
+		/// </summary>
+		/// <param name="Sentance">The Sentance as a string</param>
 		public bool Validate (string Sentance) {
 
 			string[] words = Sentance.Split(new char[] { ' ' });
@@ -33,6 +36,10 @@ namespace LSMachine
 
 		}
 
+		/// <summary>
+		/// Generates a collection of strings (FSM Keys) which
+		/// is accepted by the FSM
+		/// </summary>
 		public ICollection<string> Generate () {
 
 			var ans = new List<string>();
@@ -45,6 +52,7 @@ namespace LSMachine
 				currentKeyWords = CurrentState.Key.Split(new char[] { ' ' });
 				ans.Add(currentKeyWords.First());
 			} while (!CurrentState.IsFinishState);
+
 			foreach (string word in currentKeyWords.Skip(1)) {
 				ans.Add(word);
 			}
