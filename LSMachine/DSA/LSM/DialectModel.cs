@@ -33,7 +33,25 @@ namespace LSMachine
 
 		}
 
-		public abstract ICollection<string> Generate ();
+		public ICollection<string> Generate () {
+
+			var ans = new List<string>();
+			string[] currentKeyWords = null;
+			var originalCurrentState = CurrentState;
+
+			do {
+				GoToNextState();
+				currentKeyWords = CurrentState.Key.Split(new char[] { ' ' });
+				ans.Add(currentKeyWords.First());
+			} while (!CurrentState.IsFinishState);
+			foreach (string word in currentKeyWords.Skip(1)) {
+				ans.Add(word);
+			}
+
+			CurrentState = originalCurrentState;
+			return ans;
+
+		}
 
 	}
 }

@@ -29,24 +29,7 @@ namespace LSMachine {
 
 		}
 
-		public override ICollection<string> Generate () {
 
-			var ans = new List<string>();
-			string[] currentKeyWords = null;
-
-			do {
-				GoToNextState();
-				currentKeyWords = CurrentState.Key.Split(new char[] { ' ' });
-				ans.Add(currentKeyWords.First());
-			} while (!CurrentState.IsFinishState);
-			foreach (string word in currentKeyWords.Skip(1)) {
-				ans.Add(word);
-			}
-
-			Reset();
-			return ans;
-
-		}
 
 	}
 
