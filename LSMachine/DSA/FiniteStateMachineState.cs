@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LSMachine
 {
-	public abstract partial class FiniteStateMachine <T> {
+	public abstract partial class FiniteStateMachine <TKey, TData> where TKey : IEqualityComparer<TKey> {
 		public partial class State :
 			IEnumerable<State> {
 
 			public ICollection<State> NextStates { get; set; }
 			public bool IsFinishState { get; set; }
-			public T Data { get; set; }
-			public FiniteStateMachine<T> Machine;
+			public TData Data { get; set; }
+			public TKey Key { get; set; }
+			public FiniteStateMachine<TKey, TData> Machine;
 
-			public State (FiniteStateMachine<T> MachineOwner) {
+			public State (FiniteStateMachine<TKey, TData> MachineOwner) {
 				NextStates = new List<State> ();
 				Machine = MachineOwner;
 			}
@@ -36,6 +38,22 @@ namespace LSMachine
 			/// <value> The adjacent count </value>
 			public uint AdjacentCount {
 				get { return (uint)NextStates.Count; }
+			}
+
+			/// <summary>
+			/// Returns the next associated state which matches
+			/// the specified key
+			/// </summary>
+			/// <param name="Key"> The key to match the next state</param>
+			public State Next (TKey Key) {
+
+				var nextStates = 
+					from s in NextStates
+					where s.Key.Equals(Key)
+					select s;
+
+				return nextStates.FirstOrDefault();
+
 			}
 				
 			public IEnumerator<State> GetEnumerator () {

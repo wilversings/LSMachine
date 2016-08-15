@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LSMachine
 {
-	public abstract partial class FiniteStateMachine <T> {
+	public abstract partial class FiniteStateMachine <TKey, TData> {
 
 		protected ICollection<State> States;
 
