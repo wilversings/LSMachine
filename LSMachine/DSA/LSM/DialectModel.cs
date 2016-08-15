@@ -32,6 +32,9 @@ namespace LSMachine
 			return true;
 
 		}
+
+		public abstract ICollection<string> Generate ();
+
 	}
 }
 

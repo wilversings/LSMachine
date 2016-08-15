@@ -23,21 +23,26 @@ namespace LSMachine {
 				FilePath = Settings.GetSetting("RawDataPath");
 
 			string currentLine;
-	
 			using (var inStream = new System.IO.StreamReader(FilePath)) {
 					
 				while ((currentLine = inStream.ReadLine()) != null) {
+					string[] words = currentLine.Split(new char[] { ' ' });
 					var cursorState = Lsm.StartState;
 
-					string[] words = currentLine.Split(new char[] {' '});
 					for (int ind = 0; ind < words.Length - Coherence + 1; ++ind) {
-						var newState = Lsm.CreateNewState();
-						newState.Key = string.Join(" ", words.Skip(ind).Take(Coherence));
-						cursorState = cursorState.Associate(newState);
+						string currentKey = string.Join(" ", words.Skip(ind).Take(Coherence));
+						var foundState = Lsm.GetState(currentKey);
+						if (foundState == null) {
+							var newState = Lsm.CreateNewState(currentKey);
+							cursorState.Associate(newState);
+							cursorState = newState;
+						} else {
+							cursorState.Associate(foundState);
+							cursorState = foundState;
+						}
 					}
-						
+					cursorState.IsFinishState = true;
 				}
-						
 			}
 
 		}

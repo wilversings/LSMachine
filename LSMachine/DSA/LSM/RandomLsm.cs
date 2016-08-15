@@ -6,8 +6,11 @@ using System.Linq;
 namespace LSMachine {
 	
 	public class RandomLsm : DialectModel<dynamic> { 
-		
+
+		protected Random RandomEngine;
+
 		public RandomLsm (){
+			RandomEngine = new Random((int)DateTime.Now.ToBinary());
 		}
 
 		/// <summary>
@@ -18,18 +21,30 @@ namespace LSMachine {
 		public override State GoToNextState () {
 
 			// Pseudo-random generator
-			var randomEngine = new Random((int)DateTime.Now.ToBinary());
 			int adjacentCount = CurrentState.AdjacentCount;
-			int nextStateIndex = randomEngine.Next() % adjacentCount;
+			int nextStateIndex = RandomEngine.Next() % adjacentCount;
 
 			CurrentState = CurrentState.NextStates.ElementAt(nextStateIndex);
 			return CurrentState;
-			
+
 		}
 
-		public IList<string> Generate () {
+		public override ICollection<string> Generate () {
 
-			throw new NotImplementedException();
+			var ans = new List<string>();
+			string[] currentKeyWords = null;
+
+			do {
+				GoToNextState();
+				currentKeyWords = CurrentState.Key.Split(new char[] { ' ' });
+				ans.Add(currentKeyWords.First());
+			} while (!CurrentState.IsFinishState);
+			foreach (string word in currentKeyWords.Skip(1)) {
+				ans.Add(word);
+			}
+
+			Reset();
+			return ans;
 
 		}
 
