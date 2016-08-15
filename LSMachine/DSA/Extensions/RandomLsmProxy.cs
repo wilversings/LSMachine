@@ -1,4 +1,6 @@
 ﻿using System;
+using LSMachine.Utils;
+using System.Linq;
 
 namespace LSMachine {
 	public static class RandomLsmProxy {
@@ -11,8 +13,33 @@ namespace LSMachine {
 		/// <param name="Lsm">`this` instance of the Lsm</param>
 		/// <param name="filePath">Raw data file path</param>
 		/// <param name="Coherence">The coherence of the Lsm</param>
-		public static void LoadFromRawData(this RandomLsm Lsm, string filePath, int Coherence) {
-			throw new NotImplementedException();
+		public static void LoadFromRawData(
+			this RandomLsm Lsm, 
+			int Coherence,
+			string FilePath = null
+		) {
+			
+			if (FilePath == null)
+				FilePath = Settings.GetSetting("RawDataPath");
+
+			string currentLine;
+	
+			using (var inStream = new System.IO.StreamReader(FilePath)) {
+					
+				while ((currentLine = inStream.ReadLine()) != null) {
+					var cursorState = Lsm.StartState;
+
+					string[] words = currentLine.Split(new char[] {' '});
+					for (int ind = 0; ind < words.Length - Coherence + 1; ++ind) {
+						var newState = Lsm.CreateNewState();
+						newState.Key = string.Join(" ", words.Skip(ind).Take(Coherence));
+						cursorState = cursorState.Associate(newState);
+					}
+						
+				}
+						
+			}
+
 		}
 
 		/// <summary>
