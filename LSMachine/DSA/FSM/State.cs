@@ -9,14 +9,14 @@ namespace LSMachine
 		public partial class State :
 			IEnumerable<State> {
 
-			public ICollection<State> NextStates { get; set; }
+			public Dictionary<TKey, State> NextStates { get; set; }
 			public bool IsFinishState { get; set; }
 			public TData Data { get; set; }
 			public TKey Key { get; set; }
 			public FiniteStateMachine<TKey, TData> Machine;
 
 			public State (FiniteStateMachine<TKey, TData> MachineOwner, TKey Key) {
-				NextStates = new List<State> ();
+				NextStates = new Dictionary<TKey, State> ();
 				Machine = MachineOwner;
 				this.Key = Key;
 			}
@@ -29,7 +29,14 @@ namespace LSMachine
 			/// <returns> `this` for the chainable property </returns>
 			public State Associate (State Second) {
 
-				NextStates.Add(Second);
+				NextStates[Second.Key] = Second;
+
+				return this;
+			}
+
+			public State Associate (TKey Key) {
+
+				NextStates[Key] = Machine[Key];
 
 				return this;
 			}
@@ -42,28 +49,18 @@ namespace LSMachine
 				get { return NextStates.Count; }
 			}
 
-			/// <summary>
-			/// Returns the next associated state which matches
-			/// the specified key
-			/// </summary>
-			/// <param name="Key"> The key to match the next state</param>
-			public State Next (TKey Key) {
-				
-				var nextStates = 
-					from s in NextStates
-					where s.Key.Equals(Key)
-					select s;
-
-				return nextStates.FirstOrDefault();
-
+			public State this[TKey Key] {
+				get {
+					return NextStates[Key];
+				}
 			}
 				
 			public IEnumerator<State> GetEnumerator () {
-				return NextStates.GetEnumerator();
+				return NextStates.Values.GetEnumerator();
 			}
 
 			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () {
-				return NextStates.GetEnumerator();
+				return NextStates.Values.GetEnumerator();
 			}
 		}
 	}

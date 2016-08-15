@@ -24,7 +24,7 @@ namespace LSMachine {
 			int adjacentCount = CurrentState.AdjacentCount;
 			int nextStateIndex = RandomEngine.Next() % adjacentCount;
 
-			CurrentState = CurrentState.NextStates.ElementAt(nextStateIndex);
+			CurrentState = CurrentState.NextStates.Values.ElementAt(nextStateIndex);
 			return CurrentState;
 
 		}

@@ -44,10 +44,15 @@ namespace LSMachine
 			CurrentState = StartState;
 		}
 
-		public State GetState (TKey Key) {
-			if (States.ContainsKey(Key))
-				return States[Key];
-			return null;
+		public State this[TKey Key] {
+			get {
+				if (States.ContainsKey(Key))
+					return States[Key];
+				return null;
+			}
+			set {
+				States[Key] = value;
+			}
 		}
 
 		public abstract State GoToNextState ();

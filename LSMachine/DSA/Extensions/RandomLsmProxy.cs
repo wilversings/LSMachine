@@ -31,15 +31,11 @@ namespace LSMachine {
 
 					for (int ind = 0; ind < words.Length - Coherence + 1; ++ind) {
 						string currentKey = string.Join(" ", words.Skip(ind).Take(Coherence));
-						var foundState = Lsm.GetState(currentKey);
-						if (foundState == null) {
-							var newState = Lsm.CreateNewState(currentKey);
-							cursorState.Associate(newState);
-							cursorState = newState;
-						} else {
-							cursorState.Associate(foundState);
-							cursorState = foundState;
-						}
+						var foundState = Lsm[currentKey];
+						if (foundState == null) 
+							foundState = Lsm.CreateNewState(currentKey);
+						cursorState.Associate(foundState);
+						cursorState = foundState;
 					}
 					cursorState.IsFinishState = true;
 				}

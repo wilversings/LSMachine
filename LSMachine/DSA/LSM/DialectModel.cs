@@ -24,7 +24,7 @@ namespace LSMachine
 			for (int ind = 0; ind < wordLen - Coherence + 1; ++ind) {
 				string[] currentStateWords = words.Skip(ind).Take(Coherence).ToArray();
 
-				currentState = currentState.Next(string.Join(" ", currentStateWords));
+				currentState = currentState[string.Join(" ", currentStateWords)];
 				if (currentState == null)
 					return false;
 			}
