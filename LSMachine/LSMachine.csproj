@@ -41,6 +41,7 @@
     <Compile Include="DSA\FSM\FiniteStateMachine.cs" />
     <Compile Include="DSA\FSM\State.cs" />
     <Compile Include="DSA\LSM\DialectModel.cs" />
+    <Compile Include="DSA\LSM\RandomLsm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -48,5 +49,6 @@
   <ItemGroup>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Numerics" />
   </ItemGroup>
 </Project>

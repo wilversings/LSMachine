@@ -37,8 +37,8 @@ namespace LSMachine
 			/// Returns the number of possible next states of this state
 			/// </summary>
 			/// <value> The adjacent count </value>
-			public uint AdjacentCount {
-				get { return (uint)NextStates.Count; }
+			public int AdjacentCount {
+				get { return NextStates.Count; }
 			}
 
 			/// <summary>
