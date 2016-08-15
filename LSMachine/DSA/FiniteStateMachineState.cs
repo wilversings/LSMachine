@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace LSMachine
 {
-	public abstract partial class FiniteStateMachine <TKey, TData> where TKey : IEqualityComparer<TKey> {
+	public abstract partial class FiniteStateMachine <TKey, TData> 
+		where TKey : class {
 		public partial class State :
 			IEnumerable<State> {
 
@@ -46,7 +47,7 @@ namespace LSMachine
 			/// </summary>
 			/// <param name="Key"> The key to match the next state</param>
 			public State Next (TKey Key) {
-
+				
 				var nextStates = 
 					from s in NextStates
 					where s.Key.Equals(Key)
