@@ -15,9 +15,10 @@ namespace LSMachine
 			public TKey Key { get; set; }
 			public FiniteStateMachine<TKey, TData> Machine;
 
-			public State (FiniteStateMachine<TKey, TData> MachineOwner) {
+			public State (FiniteStateMachine<TKey, TData> MachineOwner, TKey Key) {
 				NextStates = new List<State> ();
 				Machine = MachineOwner;
+				this.Key = Key;
 			}
 
 			/// <summary>

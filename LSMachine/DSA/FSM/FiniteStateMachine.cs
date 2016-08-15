@@ -6,7 +6,7 @@ namespace LSMachine
 {
 	public abstract partial class FiniteStateMachine <TKey, TData> {
 
-		protected ICollection<State> States;
+		protected Dictionary<TKey, State> States;
 
 		public State StartState { get; set; }
 		public State CurrentState { get; set; }
@@ -16,19 +16,17 @@ namespace LSMachine
 		/// and add its to the machine
 		/// </summary>
 		/// <returns> The newly created state </returns>
-		public State CreateNewState () {
-			States = new List<State>();
-			var newState = new State(this);
-			States.Add(newState);
-			return new State(this);
+		public State CreateNewState (TKey Key) {
+			var newState = new State(this, Key);
+			States.Add(Key, newState);
+			return newState;
 		}
 
 		public FiniteStateMachine () {
-			var startState = CreateNewState();
-			var endState = CreateNewState();
 
-			StartState = startState;
-			endState.IsFinishState = true;
+			States = new Dictionary<TKey, State>();
+
+			StartState = CurrentState = new State(this, null);
 
 		}
 
@@ -37,9 +35,19 @@ namespace LSMachine
 		/// </summary>
 		/// <returns> All the finish states in the machine</returns>
 		public IEnumerable<State> FinishStates () {
-			return from s in States
+			return from s in States.Values
 			       where s.IsFinishState == true
 			       select s;
+		}
+
+		public void Reset () {
+			CurrentState = StartState;
+		}
+
+		public State GetState (TKey Key) {
+			if (States.ContainsKey(Key))
+				return States[Key];
+			return null;
 		}
 
 		public abstract State GoToNextState ();
