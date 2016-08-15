@@ -17,6 +17,7 @@ namespace LSMachine
 		/// </summary>
 		/// <returns> The newly created state </returns>
 		public State CreateNewState () {
+			States = new List<State>();
 			var newState = new State(this);
 			States.Add(newState);
 			return new State(this);

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace LSMachine {
 	
-	public class RandomLsm : DialectModel<Nullable> { 
+	public class RandomLsm : DialectModel<dynamic> { 
 		
 		public RandomLsm (){
 		}
