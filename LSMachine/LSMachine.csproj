@@ -33,11 +33,14 @@
   <ItemGroup>
     <Folder Include="Utils\" />
     <Folder Include="DSA\" />
+    <Folder Include="DSA\FSM\" />
+    <Folder Include="DSA\LSM\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\Settings.cs" />
-    <Compile Include="DSA\FiniteStateMachine.cs" />
-    <Compile Include="DSA\FiniteStateMachineState.cs" />
+    <Compile Include="DSA\FSM\FiniteStateMachine.cs" />
+    <Compile Include="DSA\FSM\State.cs" />
+    <Compile Include="DSA\LSM\DialectModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
