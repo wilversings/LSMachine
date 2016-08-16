@@ -10,7 +10,7 @@ namespace LSMachine {
 
 		public int Coherence { get; set; }
 
-		public DialectModel () {
+		public DialectModel () : base("__init_key"){
 		}
 
 		/// <summary>
@@ -19,7 +19,7 @@ namespace LSMachine {
 		/// <param name="Sentance">The Sentance as a string</param>
 		public bool Validate (string Sentance) {
 
-			string[] words = Sentance.Split(new char[] { ' ' });
+			string[] words = Sentance.Split(' ');
 			int wordLen = words.Length;
 
 			var currentState = StartState;
@@ -43,21 +43,19 @@ namespace LSMachine {
 		public ICollection<string> Generate () {
 
 			var ans = new List<string>();
-			var originalCurrentState = CurrentState;
 
 			string[] currentKeyWords = null;
-
+			var cursorState = CurrentState;
 			do {
-				GoToNextState();
-				currentKeyWords = CurrentState.Key.Split(new char[] { ' ' });
+				cursorState = GetNextState(cursorState.Key);
+				currentKeyWords = cursorState.Key.Split(' ');
 				ans.Add(currentKeyWords.First());
-			} while (!CurrentState.IsFinishState);
+			} while (!cursorState.IsFinishState);
 
 			foreach (string word in currentKeyWords.Skip(1)) {
 				ans.Add(word);
 			}
-
-			CurrentState = originalCurrentState;
+				
 			return ans;
 
 		}

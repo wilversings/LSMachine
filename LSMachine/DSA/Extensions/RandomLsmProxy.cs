@@ -31,7 +31,7 @@ namespace LSMachine {
 			using (var inStream = new System.IO.StreamReader(FilePath)) {
 					
 				while ((currentLine = inStream.ReadLine()) != null) {
-					string[] words = currentLine.Split(new char[] { ' ' });
+					string[] words = currentLine.Split(' ');
 					var cursorState = Lsm.StartState;
 
 					for (int ind = 0; ind < words.Length - Coherence + 1; ++ind) {

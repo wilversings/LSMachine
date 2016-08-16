@@ -26,11 +26,12 @@ namespace LSMachine {
 			return newState;
 		}
 
-		public FiniteStateMachine () {
+		public FiniteStateMachine (TKey StartStateKey) {
 
 			StateMap = new Dictionary<TKey, State>();
-
 			StartState = CurrentState = new State(this, null);
+			StartState.Key = StartStateKey;
+			StateMap.Add(StartStateKey, StartState);
 
 		}
 
@@ -66,7 +67,12 @@ namespace LSMachine {
 			}
 		}
 
-		public abstract State GoToNextState ();
+		public State GoToNextState () {
+			CurrentState = GetNextState(CurrentState.Key);
+			return CurrentState;
+		}
+
+		public abstract State GetNextState (TKey StateKey);
 
 	}
 }

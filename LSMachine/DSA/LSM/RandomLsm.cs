@@ -22,14 +22,14 @@ namespace LSMachine {
 		/// Chainable
 		/// </summary>
 		/// <returns> The new state </returns>
-		public override State GoToNextState () {
+		public override State GetNextState (string StateKey) {
 
 			// Pseudo-random generator
-			int adjacentCount = CurrentState.AdjacentCount;
+			var st = this[StateKey];
+			int adjacentCount = st.AdjacentCount;
 			int nextStateIndex = RandomEngine.Next() % adjacentCount;
 
-			CurrentState = CurrentState.NextStates.Values.ElementAt(nextStateIndex);
-			return CurrentState;
+			return st.NextStates.Values.ElementAt(nextStateIndex);
 
 		}
 
