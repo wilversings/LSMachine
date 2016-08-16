@@ -45,6 +45,7 @@
     <Compile Include="DSA\LSM\RandomLsm.cs" />
     <Compile Include="DSA\Extensions\RandomLsmProxy.cs" />
     <Compile Include="DSA\Extensions\FsmStatistics.cs" />
+    <Compile Include="DSA\Extensions\LsmStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
