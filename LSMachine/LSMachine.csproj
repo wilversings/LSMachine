@@ -44,6 +44,7 @@
     <Compile Include="DSA\LSM\DialectModel.cs" />
     <Compile Include="DSA\LSM\RandomLsm.cs" />
     <Compile Include="DSA\Extensions\RandomLsmProxy.cs" />
+    <Compile Include="DSA\Extensions\FsmStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

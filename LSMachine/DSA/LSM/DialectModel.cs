@@ -6,9 +6,10 @@ namespace LSMachine {
 
 	public abstract class DialectModel<TData> : FiniteStateMachine<string, TData> {
 
-		protected string Alphabet;
+		//public string Alphabet;
 
 		public int Coherence { get; set; }
+		public string Alphabet { get; private set; }
 
 		public DialectModel () : base("__init_key"){
 		}

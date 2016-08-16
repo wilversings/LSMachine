@@ -72,6 +72,12 @@ namespace LSMachine {
 			return CurrentState;
 		}
 
+		public ICollection<State> AllStates {
+			get {
+				return StateMap.Values;
+			}
+		}
+
 		public abstract State GetNextState (TKey StateKey);
 
 	}
