@@ -48,11 +48,10 @@ namespace LSMachine {
 			string[] currentKeyWords = null;
 			var cursorState = CurrentState;
 
-			cursorState = GetNextState(cursorState.Key);
 			while (!cursorState.IsFinishState) {
+				cursorState = GetNextState(cursorState.Key);
 				currentKeyWords = cursorState.Key.Split(' ');
 				ans.Add(currentKeyWords.First());
-				cursorState = GetNextState(cursorState.Key);
 			}
 
 			foreach (string word in currentKeyWords.Skip(1)) {

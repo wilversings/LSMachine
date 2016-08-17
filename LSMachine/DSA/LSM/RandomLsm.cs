@@ -9,7 +9,7 @@ namespace LSMachine {
 	/// The implementation of a LSM which randomly selects
 	/// the new state
 	/// </summary>
-	public class RandomLsm : DialectModel<dynamic> { 
+	public class RandomLsm : DialectModel<object> { 
 
 		protected Random RandomEngine;
 
@@ -33,6 +33,10 @@ namespace LSMachine {
 
 		}
 
+		public override ICollection<string> Generate() {
+			var generated = base.Generate();
+			return generated.Take(generated.Count - 1).ToList();
+		}
 
 
 	}
