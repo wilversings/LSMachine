@@ -39,7 +39,7 @@ namespace LSMachine {
 						var foundState = Lsm[currentKey];
 						if (foundState == null) 
 							foundState = Lsm.CreateNewState(currentKey);
-						cursorState.Associate(foundState);
+						cursorState.Link(foundState);
 						cursorState = foundState;
 					}
 					cursorState.IsFinishState = true;

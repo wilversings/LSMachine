@@ -33,18 +33,25 @@ namespace LSMachine
 			/// </summary>
 			/// <param name="Second"> The node to asociate `this` with </param>
 			/// <returns> `this` for the chainable property </returns>
-			public State Associate (State Second) {
+			public State Link (State Second) {
 
 				NextStates[Second.Key] = Second;
 
 				return this;
 			}
 
-			public State Associate (TKey Key) {
+			public State Link (TKey Key) {
 
 				NextStates[Key] = Machine[Key];
 
 				return this;
+			}
+
+			public bool Cut (TKey Key) {
+				return NextStates.Remove(Key);
+			}
+			public void CutAll() {
+				NextStates.Clear();
 			}
 
 			/// <summary>
@@ -64,7 +71,13 @@ namespace LSMachine
 					return NextStates[Key];
 				}
 			}
-				
+
+			public ICollection<State> AllAdjacent {
+				get {
+					return NextStates.Values;
+				}
+			}
+
 			public IEnumerator<State> GetEnumerator () {
 				return NextStates.Values.GetEnumerator();
 			}

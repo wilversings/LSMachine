@@ -39,10 +39,12 @@ namespace LSMachine {
 		/// Does a query for all the finish states in the machine
 		/// </summary>
 		/// <returns> All the finish states in the machine</returns>
-		public IEnumerable<State> FinishStates () {
-			return from s in StateMap.Values
-			       where s.IsFinishState == true
-			       select s;
+		public IEnumerable<State> FinishStates {
+			get {
+				return (from s in StateMap.Values
+				        where s.IsFinishState == true
+				        select s).ToList();
+			}
 		}
 
 		/// <summary>
@@ -76,6 +78,51 @@ namespace LSMachine {
 			get {
 				return StateMap.Values;
 			}
+		}
+
+		public void Transpose () {
+
+			ICollection<State> futureFinishStates = StartState.AllAdjacent.ToList();
+			StartState.CutAll();
+
+			IEnumerable<State> currentFinishStates = FinishStates.ToList();
+
+			foreach (State currentFinishState in currentFinishStates) {
+				currentFinishState.IsFinishState = false;
+			}
+			foreach (State finishState in futureFinishStates) {
+				finishState.IsFinishState = true;
+			}
+
+			var reverseLinks = new Dictionary<TKey, List<TKey>>();
+
+			foreach (State state in AllStates) {
+
+				if (state.Key == StartState.Key)
+					continue;
+
+				foreach (State neighbour in state) {
+					if (reverseLinks.ContainsKey(neighbour.Key)) {
+						reverseLinks[neighbour.Key].Add(state.Key);
+					} else {
+						var newList = new List<TKey>();
+						newList.Add(state.Key);
+						reverseLinks.Add(neighbour.Key, newList);
+					}
+				}
+				state.CutAll();
+			}
+
+			foreach (var statePair in reverseLinks) {
+				foreach (var valueState in statePair.Value) {
+					this[statePair.Key].Link(this[valueState]);
+				}
+			}
+
+			foreach (State startState in currentFinishStates) {
+				StartState.Link(startState);
+			}
+
 		}
 
 		public abstract State GetNextState (TKey StateKey);
