@@ -18,7 +18,7 @@ namespace LSMachine {
 		/// Checks whether the Sentance is accepted by the FSM
 		/// </summary>
 		/// <param name="Sentance">The Sentance as a string</param>
-		public bool Validate (string Sentance) {
+		public virtual bool Validate (string Sentance) {
 
 			string[] words = Sentance.Split(' ');
 			int wordLen = words.Length;
@@ -41,7 +41,7 @@ namespace LSMachine {
 		/// Generates a collection of strings (FSM Keys) which
 		/// is accepted by the FSM
 		/// </summary>
-		public ICollection<string> Generate () {
+		public virtual ICollection<string> Generate () {
 
 			var ans = new List<string>();
 

@@ -80,7 +80,7 @@ namespace LSMachine {
 			}
 		}
 
-		public void Transpose () {
+		public virtual void Transpose () {
 
 			ICollection<State> futureFinishStates = StartState.AllAdjacent.ToList();
 			StartState.CutAll();
