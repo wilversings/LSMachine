@@ -47,11 +47,13 @@ namespace LSMachine {
 
 			string[] currentKeyWords = null;
 			var cursorState = CurrentState;
-			do {
-				cursorState = GetNextState(cursorState.Key);
+
+			cursorState = GetNextState(cursorState.Key);
+			while (!cursorState.IsFinishState) {
 				currentKeyWords = cursorState.Key.Split(' ');
 				ans.Add(currentKeyWords.First());
-			} while (!cursorState.IsFinishState);
+				cursorState = GetNextState(cursorState.Key);
+			}
 
 			foreach (string word in currentKeyWords.Skip(1)) {
 				ans.Add(word);
