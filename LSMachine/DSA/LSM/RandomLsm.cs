@@ -33,12 +33,6 @@ namespace LSMachine {
 
 		}
 
-		public override ICollection<string> Generate() {
-			var generated = base.Generate();
-			return generated.Take(generated.Count - 1).ToList();
-		}
-
-
 	}
 
 }
