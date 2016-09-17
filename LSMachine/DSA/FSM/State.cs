@@ -16,14 +16,14 @@ namespace LSMachine
 			IEnumerable<State> {
 
 			public Dictionary<TKey, State> NextStates { get; set; }
-			public bool IsFinishState { get; set; }
+			public bool IsFinishing { get; set; }
 			public TData Data { get; set; }
 			public TKey Key { get; set; }
-			public FiniteStateMachine<TKey, TData> Machine;
+			public FiniteStateMachine<TKey, TData> Fsm;
 
 			public State (FiniteStateMachine<TKey, TData> MachineOwner, TKey Key) {
 				NextStates = new Dictionary<TKey, State> ();
-				Machine = MachineOwner;
+				Fsm = MachineOwner;
 				this.Key = Key;
 			}
 
@@ -33,16 +33,16 @@ namespace LSMachine
 			/// </summary>
 			/// <param name="Second"> The node to asociate `this` with </param>
 			/// <returns> `this` for the chainable property </returns>
-			public State Link (State Second) {
+			public State Link (State Other) {
 
-				NextStates[Second.Key] = Second;
+				NextStates[Other.Key] = Other;
 
 				return this;
 			}
 
 			public State Link (TKey Key) {
 
-				NextStates[Key] = Machine[Key];
+				NextStates[Key] = Fsm[Key];
 
 				return this;
 			}

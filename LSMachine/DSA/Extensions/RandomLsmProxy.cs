@@ -28,7 +28,7 @@ namespace LSMachine {
 				FilePath = Settings.GetSetting("RawDataPath");
 
 			var finishState = Lsm.CreateNewState("__finish_state");
-			finishState.IsFinishState = true;
+			finishState.IsFinishing = true;
 
 			string currentLine;
 			using (var inStream = new System.IO.StreamReader(FilePath)) {

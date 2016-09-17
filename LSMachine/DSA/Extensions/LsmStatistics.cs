@@ -8,11 +8,11 @@ namespace LSMachine {
 		private static List<string> data = null;
 
 		public static int Redundancy<TValue>
-		(this DialectModel<TValue> Lsm, int CasesRan) {
+		(this DialectModel<TValue> Lsm, int CaseNumber) {
 
 			int redundancy = 0;
 
-			while (CasesRan-- != 0) {
+			while (CaseNumber-- != 0) {
 				if (IsRendundant(Lsm.Generate())) {
 					++redundancy;
 				}

@@ -42,7 +42,7 @@ namespace LSMachine {
 		public IEnumerable<State> FinishStates {
 			get {
 				return (from s in StateMap.Values
-				        where s.IsFinishState == true
+				        where s.IsFinishing == true
 				        select s).ToList();
 			}
 		}
@@ -88,10 +88,10 @@ namespace LSMachine {
 			IEnumerable<State> currentFinishStates = FinishStates.ToList();
 
 			foreach (State currentFinishState in currentFinishStates) {
-				currentFinishState.IsFinishState = false;
+				currentFinishState.IsFinishing = false;
 			}
 			foreach (State finishState in futureFinishStates) {
-				finishState.IsFinishState = true;
+				finishState.IsFinishing = true;
 			}
 
 			var reverseLinks = new Dictionary<TKey, List<TKey>>();
