@@ -13,7 +13,7 @@ namespace LSMachine {
 
 		protected Random RandomEngine;
 
-		public RandomLsm (){
+		public RandomLsm () {
 			RandomEngine = new Random((int)DateTime.Now.ToBinary());
 		}
 

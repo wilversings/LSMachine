@@ -18,7 +18,7 @@ namespace LSMachine {
 		/// <param name="Lsm">`this` instance of the Lsm</param>
 		/// <param name="filePath">Raw data file path</param>
 		/// <param name="Coherence">The coherence of the Lsm</param>
-		public static void LoadFromRawData(
+		public static void LoadFromRawData (
 			this RandomLsm Lsm, 
 			int Coherence,
 			string FilePath = null

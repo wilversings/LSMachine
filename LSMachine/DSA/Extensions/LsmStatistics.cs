@@ -37,9 +37,7 @@ namespace LSMachine {
 			return false;
 
 		}
-
-
-
+			
 	}
 }
 

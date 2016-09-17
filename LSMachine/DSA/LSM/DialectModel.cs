@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace LSMachine {
-
 	public abstract class DialectModel<TData> : FiniteStateMachine<string, TData> {
 
 		//public string Alphabet;
@@ -11,7 +10,7 @@ namespace LSMachine {
 		public int Coherence { get; set; }
 		public string Alphabet { get; private set; }
 
-		public DialectModel () : base("__init_key"){
+		public DialectModel () : base("__init_key") {
 		}
 
 		/// <summary>
