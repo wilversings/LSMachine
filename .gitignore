@@ -40,5 +40,5 @@ Thumbs.db
 *.dotCover
 
 #project
-[Ee]ntrypoint
+[Ee]ntrypoint.cs
 [Dd]ata
