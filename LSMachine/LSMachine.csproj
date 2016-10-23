@@ -36,6 +36,7 @@
     <Folder Include="DSA\FSM\" />
     <Folder Include="DSA\LSM\" />
     <Folder Include="DSA\Extensions\" />
+    <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\Settings.cs" />
@@ -46,6 +47,8 @@
     <Compile Include="DSA\Extensions\RandomLsmProxy.cs" />
     <Compile Include="DSA\Extensions\FsmStatistics.cs" />
     <Compile Include="DSA\Extensions\LsmStatistics.cs" />
+    <Compile Include="Entrypoint.cs" />
+    <Compile Include="Domain\Word.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
