@@ -47,7 +47,6 @@
     <Compile Include="DSA\Extensions\RandomLsmProxy.cs" />
     <Compile Include="DSA\Extensions\FsmStatistics.cs" />
     <Compile Include="DSA\Extensions\LsmStatistics.cs" />
-    <Compile Include="Entrypoint.cs" />
     <Compile Include="Domain\Word.cs" />
   </ItemGroup>
   <ItemGroup>
