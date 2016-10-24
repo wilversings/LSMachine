@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LSMachine
-{
+namespace LSMachine {
+	
 	public abstract partial class FiniteStateMachine <TKey, TData> 
 		where TKey : class {
 

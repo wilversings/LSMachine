@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace LSMachine {
+	
 	public static class FsmStatistics {
 		
 		public static double AdjacentNumberAverage<TKey, TValue> 

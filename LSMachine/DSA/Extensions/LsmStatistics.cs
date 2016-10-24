@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace LSMachine {
+	
 	public static class LsmStatistics {
 
 		private static List<string> data = null;
@@ -22,12 +23,12 @@ namespace LSMachine {
 
 		}
 
-		public static bool IsRendundant (ICollection<string> output) {
+		public static bool IsRendundant (ICollection<string> Output) {
 
 			if (data == null)
 				data = System.IO.File.ReadAllLines(Utils.Settings.GetSetting("RawDataPath")).ToList();
 
-			string outputString = string.Join(" ", output);
+			string outputString = string.Join(" ", Output);
 			foreach (string line in data) {
 				if (line.Contains(outputString)) {
 					return true;

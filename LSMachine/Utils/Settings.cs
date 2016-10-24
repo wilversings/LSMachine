@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 
 namespace LSMachine.Utils {
+	
 	public static class Settings {
 
 		private static XDocument SettingsXml;

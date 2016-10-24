@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace LSMachine {
+	
 	public abstract class DialectModel<TData> : FiniteStateMachine<string, TData> {
 
 		//public string Alphabet;
