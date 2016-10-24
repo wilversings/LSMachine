@@ -36,6 +36,8 @@
     <Folder Include="DSA\FSM\" />
     <Folder Include="DSA\LSM\" />
     <Folder Include="DSA\Extensions\" />
+    <Folder Include="Domain\" />
+    <Folder Include="DSA\LSM\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utils\Settings.cs" />
@@ -46,6 +48,9 @@
     <Compile Include="DSA\Extensions\RandomLsmProxy.cs" />
     <Compile Include="DSA\Extensions\FsmStatistics.cs" />
     <Compile Include="DSA\Extensions\LsmStatistics.cs" />
+    <Compile Include="DSA\LSM\Interfaces\IRandomLsm.cs" />
+    <Compile Include="DSA\LSM\Interfaces\ILabeledLsm.cs" />
+    <Compile Include="DSA\LSM\Interfaces\ILearningLsm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -9,7 +9,7 @@ namespace LSMachine {
 	/// The implementation of a LSM which randomly selects
 	/// the new state
 	/// </summary>
-	public class RandomLsm : DialectModel<object> { 
+	public class RandomLsm : DialectModel<object>, IRandomLsm { 
 
 		protected Random RandomEngine;
 
