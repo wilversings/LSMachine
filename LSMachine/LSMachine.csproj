@@ -30,4 +30,34 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Utils\" />
+    <Folder Include="DSA\" />
+    <Folder Include="DSA\FSM\" />
+    <Folder Include="DSA\LSM\" />
+    <Folder Include="DSA\Extensions\" />
+    <Folder Include="Domain\" />
+    <Folder Include="DSA\LSM\Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Utils\Settings.cs" />
+    <Compile Include="DSA\FSM\FiniteStateMachine.cs" />
+    <Compile Include="DSA\FSM\State.cs" />
+    <Compile Include="DSA\LSM\DialectModel.cs" />
+    <Compile Include="DSA\LSM\RandomLsm.cs" />
+    <Compile Include="DSA\Extensions\RandomLsmProxy.cs" />
+    <Compile Include="DSA\Extensions\FsmStatistics.cs" />
+    <Compile Include="DSA\Extensions\LsmStatistics.cs" />
+    <Compile Include="DSA\LSM\Interfaces\IRandomLsm.cs" />
+    <Compile Include="DSA\LSM\Interfaces\ILabeledLsm.cs" />
+    <Compile Include="DSA\LSM\Interfaces\ILearningLsm.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
 </Project>
